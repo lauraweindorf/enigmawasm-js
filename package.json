@@ -1,8 +1,8 @@
 {
-  "name": "cosmwasm-js-monorepo-root",
-  "description": "Transaction codec and client to communicate with any wasmd blockchain",
+  "name": "enigmawasm-js",
+  "description": "Transaction codec and client to communicate with the enigmad blockchain",
   "private": true,
-  "author": "Ethan Frey <ethanfrey@users.noreply.github.com>",
+  "author": "(adapted from cosmwasm-js repo by Ethan Frey <ethanfrey@users.noreply.github.com>)",
   "license": "Apache-2.0",
   "main": "build/index.js",
   "types": "types/index.d.ts",
@@ -15,7 +15,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/confio/cosmwasm-js"
+    "url": "https://github.com/lauraweindorf/enigmamwasm-js"
   },
   "publishConfig": {
     "access": "public"

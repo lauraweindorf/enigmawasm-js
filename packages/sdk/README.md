@@ -1,12 +1,12 @@
-# @cosmwasm/sdk
+# @enigmawasm/sdk
 
-[![npm version](https://img.shields.io/npm/v/@cosmwasm/sdk.svg)](https://www.npmjs.com/package/@cosmwasm/sdk)
+[![npm version](https://img.shields.io/npm/v/@enigmawasm/sdk.svg)](https://www.npmjs.com/package/@enigmawasm/sdk)
 
-An SDK to build CosmWasm clients.
+An SDK to build EnigmaWasm clients.
 
 ## License
 
-This package is part of the cosmwasm-js repository, licensed under the Apache
+This package is part of the enigmawasm-js repository, licensed under the Apache
 License 2.0 (see
-[NOTICE](https://github.com/confio/cosmwasm-js/blob/master/NOTICE) and
-[LICENSE](https://github.com/confio/cosmwasm-js/blob/master/LICENSE)).
+[NOTICE](https://github.com/lauraweindorf/enigmawasm-js/blob/master/NOTICE) and
+[LICENSE](https://github.com/lauraweindorf/enigmawasm-js/blob/master/LICENSE)).

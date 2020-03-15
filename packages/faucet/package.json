@@ -1,13 +1,13 @@
 {
-  "name": "@cosmwasm/faucet",
+  "name": "@enigmawasm/faucet",
   "version": "0.7.5",
   "description": "The faucet",
-  "author": "Ethan Frey <ethanfrey@users.noreply.github.com>",
+  "author": "(adpated from repo by Ethan Frey <ethanfrey@users.noreply.github.com>)",
   "license": "Apache-2.0",
   "main": "build/index.js",
   "types": "types/index.d.ts",
   "bin": {
-    "cosmwasm-faucet": "bin/cosmwasm-faucet"
+    "enigmawasm-faucet": "bin/enigmawasm-faucet"
   },
   "files": [
     "build/",
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/confio/cosmwasm-js/tree/master/packages/faucet"
+    "url": "https://github.com/lauraweindorf/enigmawasm-js/tree/master/packages/faucet"
   },
   "publishConfig": {
     "access": "public"

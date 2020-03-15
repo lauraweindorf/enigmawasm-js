@@ -17,7 +17,7 @@ export async function createUserProfile(
   // first account is the token holder
   const numberOfIdentities = 1 + numberOfDistributors;
   for (let i = 0; i < numberOfIdentities; i++) {
-    const path = HdPaths.cosmos(i);
+    const path = HdPaths.enigma(i);
     const identity = await profile.createIdentity(wallet.id, chainId, path);
     if (logging) {
       const role = i === 0 ? "token holder " : `distributor ${i}`;

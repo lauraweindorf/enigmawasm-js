@@ -1,6 +1,8 @@
-# CosmWasm JS
+# EnigmaWasm JS
 
-This is a JavaScript/TypeScript client-side binding to [wasmd](https://github.com/cosmwasm/wasmd), a sample blockchain for the [cosmwasm](https://github.com/confio/cosmwasm) smart contracting platform.
+(forked from the CosmWasm JS repo)
+
+This is a JavaScript/TypeScript client-side binding to [enigmad](https://github.com/enigmampc/EnigmaBlockchain), a sample blockchain for the [Enigma Blockchain CosmWasm](https://github.com/EnigmaBlockchain/cosmwasm) smart contracting platform.
 
 ## Development
 
@@ -21,8 +23,8 @@ yarn format && yarn lint
 To run the entire test suite, you need to run a local blockchain to test against. This should work on any Linux/OSX system with docker installed.
 
 ```sh
-./scripts/wasmd/start.sh
-./scripts/wasmd/init.sh
+./scripts/enigmad/start.sh
+./scripts/enigmad/init.sh
 WASMD_ENABLED=1 yarn test
-./scripts/wasmd/stop.sh
+./scripts/enigmad/stop.sh
 ```

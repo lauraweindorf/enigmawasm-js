@@ -1,11 +1,11 @@
 import { TokenConfiguration } from "@cosmwasm/bcp";
 
-export const binaryName = "cosmwasm-faucet";
+export const binaryName = "enigmawasm-faucet";
 export const concurrency: number = Number.parseInt(process.env.FAUCET_CONCURRENCY || "", 10) || 5;
 export const port: number = Number.parseInt(process.env.FAUCET_PORT || "", 10) || 8000;
 export const mnemonic: string | undefined = process.env.FAUCET_MNEMONIC;
 
-export const addressPrefix = "cosmos";
+export const addressPrefix = "enigma";
 
 /** For the local development chain */
 export const developmentTokenConfig: TokenConfiguration = {
@@ -13,8 +13,8 @@ export const developmentTokenConfig: TokenConfiguration = {
     {
       fractionalDigits: 6,
       name: "Fee Token",
-      ticker: "COSM",
-      denom: "ucosm",
+      ticker: "SCRT",
+      denom: "uscrt",
     },
     {
       fractionalDigits: 6,
