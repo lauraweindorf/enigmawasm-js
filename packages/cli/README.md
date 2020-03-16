@@ -1,46 +1,46 @@
-# @cosmwasm/cli
+# @lcw-engimawasm/cli
 
-[![npm version](https://img.shields.io/npm/v/@cosmwasm/cli.svg)](https://www.npmjs.com/package/@cosmwasm/cli)
+[![npm version](https://img.shields.io/npm/v/@cosmwasm/cli.svg)](https://www.npmjs.com/package/@lcw-enigmawasm/cli)
 
 ## Installation and first run
 
-The `cosmwasm-cli` executable is available via npm. We recommend local
+The `enigmawasm-cli` executable is available via npm. We recommend local
 installations to your demo project. If you don't have one yet, just
-`mkdir cosmwasm-cli-installation && cd cosmwasm-cli-installation && yarn init --yes`.
+`mkdir enigmawasm-cli-installation && cd enigmawasm-cli-installation && yarn init --yes`.
 
 ### locally with yarn
 
 ```
-$ yarn add @cosmwasm/cli --dev
-$ ./node_modules/.bin/cosmwasm-cli
+$ yarn add @lcw-enigmawasm/cli --dev
+$ ./node_modules/.bin/enigmawasm-cli
 ```
 
 ### locally with npm
 
 ```
-$ npm install @cosmwasm/cli --save-dev
-$ ./node_modules/.bin/cosmwasm-cli
+$ npm install @lcw-enigmawasm/cli --save-dev
+$ ./node_modules/.bin/enigmawasm-cli
 ```
 
 ### globally with yarn
 
 ```
-$ yarn global add @cosmwasm/cli
-$ cosmwasm-cli
+$ yarn global add @lcw-enigmawasm/cli
+$ enigmawasm-cli
 ```
 
 ### globally with npm
 
 ```
-$ npm install -g @cosmwasm/cli
-$ cosmwasm-cli
+$ npm install -g @lcw-enigmawasm/cli
+$ enigmawasm-cli
 ```
 
 ## Getting started
 
-1. Install `@cosmwasm/cli` and run `cosmwasm-cli` as shown above
-2. Start a local wasmd blockchain
-3. Start with `./bin/cosmwasm-cli --init examples/local_faucet.ts`
+1. Install `@lcw-enigmawasm/cli` and run `enigmawasm-cli` as shown above
+2. Start a local enigmad blockchain
+3. Start with `./bin/enigmawasm-cli --init examples/local_faucet.ts`
 4. Play around as in the following example code
 
 ```ts
@@ -48,7 +48,7 @@ $ cosmwasm-cli
 const { account_number, sequence } = (await client.authAccounts(faucetAddress)).result.value;
 
 // Craft a send transaction
-const emptyAddress = Bech32.encode("cosmos", Random.getBytes(20));
+const emptyAddress = Bech32.encode("enigma", Random.getBytes(20));
 const memo = "My first contract on chain";
 const sendTokensMsg: types.MsgSend = {
   type: "cosmos-sdk/MsgSend",
@@ -57,7 +57,7 @@ const sendTokensMsg: types.MsgSend = {
     to_address: emptyAddress,
     amount: [
       {
-        denom: "ucosm",
+        denom: "uscrt",
         amount: "1234567",
       },
     ],
@@ -78,12 +78,12 @@ const postResult = await client.postTx(signedTx);
 ## Extended helpers
 
 The above code shows you the use of the API and various objects and is a great way to learn
-how to embed cosmwasm-js into your project. However, if you just want a cli to perform some
+how to embed enigmawasm-js into your project. However, if you just want a cli to perform some
 quick queries on a chain, you can use an extended set of helpers:
 
-1. Start a local wasmd blockchain, for example running the setup from `../../scripts/wasmd/start.sh`
-2. Start with `./bin/cosmwasm-cli --init examples/helpers.ts` (note the new init file)
-3. Deploy some erc20 contracts: `../../scripts/wasmd/init.sh`
+1. Start a local enigmad blockchain, for example running the setup from `../../scripts/enigmad/start.sh`
+2. Start with `./bin/enigmawasm-cli --init examples/helpers.ts` (note the new init file)
+3. Deploy some erc20 contracts: `../../scripts/enigmad/init.sh`
 4. Play around as in the following example code
 
 ```ts
@@ -121,18 +121,18 @@ smartQuery(client, foo, { balance: { address: rcpt } })
 
 ## Other example codes
 
-### Create random mnemonic and Cosmos address
+### Create random mnemonic and Enigma address
 
 ```ts
 const mnemonic = Bip39.encode(Random.getBytes(16)).toString();
 const pen = await Secp256k1Pen.fromMnemonic(mnemonic);
 const pubkey = encodeSecp256k1Pubkey(pen.pubkey);
-const address = pubkeyToAddress(pubkey, "cosmos");
+const address = pubkeyToAddress(pubkey, "enigma");
 ```
 
 ## License
 
-This package is part of the cosmwasm-js repository, licensed under the Apache
+This package is part of the enigmawasm-js repository, licensed under the Apache
 License 2.0 (see
-[NOTICE](https://github.com/confio/cosmwasm-js/blob/master/NOTICE) and
-[LICENSE](https://github.com/confio/cosmwasm-js/blob/master/LICENSE)).
+[NOTICE](https://github.com/lauraweindorf/enigmawasm-js/blob/master/NOTICE) and
+[LICENSE](https://github.com/lauraweindorf/enigmawasm-js/blob/master/LICENSE)).

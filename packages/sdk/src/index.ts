@@ -14,7 +14,7 @@ export {
   CodeDetails,
   Contract,
   ContractDetails,
-  CosmWasmClient,
+  EnigmaWasmClient,
   GetNonceResult,
   IndexedTx,
   PostTxResult,
@@ -24,7 +24,7 @@ export {
   SearchTxQuery,
   SearchTxFilter,
 } from "./cosmwasmclient";
-export { makeCosmoshubPath, Pen, PrehashType, Secp256k1Pen } from "./pen";
+export { makeEnigmachainPath, Pen, PrehashType, Secp256k1Pen } from "./pen";
 export { decodeBech32Pubkey, encodeBech32Pubkey, encodeSecp256k1Pubkey } from "./pubkey";
 export { findSequenceForSignedTx } from "./sequence";
 export { encodeSecp256k1Signature, decodeSignature } from "./signature";
@@ -32,7 +32,7 @@ export {
   ExecuteResult,
   InstantiateResult,
   SigningCallback,
-  SigningCosmWasmClient,
+  SigningEnigmaWasmClient,
   UploadMeta,
   UploadResult,
-} from "./signingcosmwasmclient";
+} from "./signingenigmawasmclient";

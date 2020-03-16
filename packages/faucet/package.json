@@ -1,6 +1,6 @@
 {
-  "name": "@enigmawasm/faucet",
-  "version": "0.7.5",
+  "name": "@lcw-enigmawasm/faucet",
+  "version": "0.0.1",
   "description": "The faucet",
   "author": "(adpated from repo by Ethan Frey <ethanfrey@users.noreply.github.com>)",
   "license": "Apache-2.0",
@@ -24,7 +24,7 @@
     "access": "public"
   },
   "scripts": {
-    "dev-start": "FAUCET_CREDIT_AMOUNT_COSM=10 FAUCET_CREDIT_AMOUNT_STAKE=5 FAUCET_CONCURRENCY=3 FAUCET_MNEMONIC=\"economy stock theory fatal elder harbor betray wasp final emotion task crumble siren bottom lizard educate guess current outdoor pair theory focus wife stone\" ./bin/cosmwasm-faucet start \"http://localhost:1317\"",
+    "dev-start": "FAUCET_CREDIT_AMOUNT_COSM=10 FAUCET_CREDIT_AMOUNT_STAKE=5 FAUCET_CONCURRENCY=3 FAUCET_MNEMONIC=\"economy stock theory fatal elder harbor betray wasp final emotion task crumble siren bottom lizard educate guess current outdoor pair theory focus wife stone\" ./bin/enigmawasm-faucet start \"http://localhost:1317\"",
     "docs": "shx rm -rf docs && typedoc --options typedoc.js",
     "format": "prettier --write --loglevel warn \"./src/**/*.ts\"",
     "lint": "eslint --max-warnings 0 \"**/*.{js,ts}\"",
@@ -35,7 +35,7 @@
     "test": "yarn build-or-skip && yarn test-node"
   },
   "dependencies": {
-    "@cosmwasm/bcp": "^0.7.5",
+    "@lcw-enigmawasm/bcp": "^0.7.5",
     "@iov/bcp": "^2.1.0",
     "@iov/crypto": "^2.1.0",
     "@iov/encoding": "^2.1.0",

@@ -1,7 +1,7 @@
 {
   "height": "20730",
   "txhash": "625BC75E697F73DA037387C34002BB2F682E7ACDCC4E015D3E90420516C6D0C8",
-  "raw_log": "[{\"msg_index\":0,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"send\"},{\"key\":\"sender\",\"value\":\"cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"cosmos1t70qnpr0az8tf7py83m4ue5y89w58lkjmx0yq2\"},{\"key\":\"amount\",\"value\":\"75000ucosm\"}]}]}]",
+  "raw_log": "[{\"msg_index\":0,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"send\"},{\"key\":\"sender\",\"value\":\"enigma1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"enigma1t70qnpr0az8tf7py83m4ue5y89w58lkjmx0yq2\"},{\"key\":\"amount\",\"value\":\"75000uscrt\"}]}]}]",
   "logs": [
     {
       "msg_index": 0,
@@ -11,15 +11,15 @@
           "type": "message",
           "attributes": [
             { "key": "action", "value": "send" },
-            { "key": "sender", "value": "cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6" },
+            { "key": "sender", "value": "enigma1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6" },
             { "key": "module", "value": "bank" }
           ]
         },
         {
           "type": "transfer",
           "attributes": [
-            { "key": "recipient", "value": "cosmos1t70qnpr0az8tf7py83m4ue5y89w58lkjmx0yq2" },
-            { "key": "amount", "value": "75000ucosm" }
+            { "key": "recipient", "value": "enigma1t70qnpr0az8tf7py83m4ue5y89w58lkjmx0yq2" },
+            { "key": "amount", "value": "75000uscrt" }
           ]
         }
       ]
@@ -34,13 +34,13 @@
         {
           "type": "cosmos-sdk/MsgSend",
           "value": {
-            "from_address": "cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
-            "to_address": "cosmos1t70qnpr0az8tf7py83m4ue5y89w58lkjmx0yq2",
-            "amount": [{ "denom": "ucosm", "amount": "75000" }]
+            "from_address": "enigma1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+            "to_address": "enigma1t70qnpr0az8tf7py83m4ue5y89w58lkjmx0yq2",
+            "amount": [{ "denom": "uscrt", "amount": "75000" }]
           }
         }
       ],
-      "fee": { "amount": [{ "denom": "ucosm", "amount": "5000" }], "gas": "200000" },
+      "fee": { "amount": [{ "denom": "uscrt", "amount": "5000" }], "gas": "200000" },
       "signatures": [
         {
           "pub_key": {

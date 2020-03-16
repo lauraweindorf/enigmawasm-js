@@ -1,15 +1,16 @@
 {
-  "name": "@cosmwasm/cli",
-  "version": "0.7.5",
-  "description": "Command line interface",
+  "name": "@lcw-enigmawasm/cli",
+  "version": "0.0.1",
+  "description": "EnigmaWasm Command line interface (adapted from cosmwasm-js)",
   "contributors": [
     "IOV SAS <admin@iov.one>",
-    "Simon Warta"
+    "Simon Warta",
+	"Laura Weindorf"
   ],
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/confio/cosmwasm-js/tree/master/packages/cli"
+    "url": "https://github.com/lauraweindorf/enigmawasm-js/tree/master/packages/cli"
   },
   "publishConfig": {
     "access": "public"
@@ -20,13 +21,13 @@
     "lint": "eslint --max-warnings 0 \"**/*.{js,ts}\"",
     "build": "tsc",
     "build-or-skip": "[ -n \"$SKIP_BUILD\" ] || yarn build",
-    "start": "yarn build-or-skip && ./bin/cosmwasm-cli",
-    "selftest": "yarn build-or-skip && ./bin/cosmwasm-cli --selftest",
+    "start": "yarn build-or-skip && ./bin/enigmawasm-cli",
+    "selftest": "yarn build-or-skip && ./bin/enigmawasm-cli --selftest",
     "test-node": "node jasmine-testrunner.js",
     "test": "yarn build-or-skip && yarn test-node"
   },
   "bin": {
-    "cosmwasm-cli": "bin/cosmwasm-cli"
+    "enigmawasm-cli": "bin/enigmawasm-cli"
   },
   "files": [
     "build/",
@@ -37,7 +38,7 @@
     "!**/testdata/"
   ],
   "dependencies": {
-    "@cosmwasm/sdk": "^0.7.5",
+    "@lcw-enigmawasm/sdk": "^0.7.5",
     "@iov/crypto": "^2.1.0",
     "@iov/encoding": "^2.1.0",
     "@iov/utils": "^2.0.2",

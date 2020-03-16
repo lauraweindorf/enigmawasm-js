@@ -26,7 +26,7 @@ describe("pubkey", () => {
   describe("decodeBech32Pubkey", () => {
     it("works", () => {
       expect(
-        decodeBech32Pubkey("cosmospub1addwnpepqd8sgxq7aw348ydctp3n5ajufgxp395hksxjzc6565yfp56scupfqhlgyg5"),
+        decodeBech32Pubkey("enigmapub1addwnpepqd8sgxq7aw348ydctp3n5ajufgxp395hksxjzc6565yfp56scupfqhlgyg5"),
       ).toEqual({
         type: "tendermint/PubKeySecp256k1",
         value: "A08EGB7ro1ORuFhjOnZcSgwYlpe0DSFjVNUIkNNQxwKQ",
@@ -49,8 +49,8 @@ describe("pubkey", () => {
         type: "tendermint/PubKeySecp256k1",
         value: "A08EGB7ro1ORuFhjOnZcSgwYlpe0DSFjVNUIkNNQxwKQ",
       };
-      expect(encodeBech32Pubkey(pubkey, "cosmospub")).toEqual(
-        "cosmospub1addwnpepqd8sgxq7aw348ydctp3n5ajufgxp395hksxjzc6565yfp56scupfqhlgyg5",
+      expect(encodeBech32Pubkey(pubkey, "enigmapub")).toEqual(
+        "enigmapub1addwnpepqd8sgxq7aw348ydctp3n5ajufgxp395hksxjzc6565yfp56scupfqhlgyg5",
       );
     });
   });

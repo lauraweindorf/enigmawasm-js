@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import {
   logs
-} from "@cosmwasm/sdk";
+} from "@lcw-enigmawasm/sdk";
 
 const defaultHttpUrl = "http://localhost:1317";
 const defaultNetworkId = "testing";
@@ -9,7 +9,7 @@ const defaultFee: types.StdFee = {
   amount: [
     {
       amount: "5000",
-      denom: "ucosm",
+      denom: "uscrt",
     },
   ],
   gas: "890000",
@@ -17,7 +17,7 @@ const defaultFee: types.StdFee = {
 
 const faucetMnemonic =
   "economy stock theory fatal elder harbor betray wasp final emotion task crumble siren bottom lizard educate guess current outdoor pair theory focus wife stone";
-const faucetAddress = "cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6";
+const faucetAddress = "enigma1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6";
 
 const pen = await Secp256k1Pen.fromMnemonic(faucetMnemonic);
 const client = new RestClient(defaultHttpUrl);
@@ -28,7 +28,7 @@ const networkId = "testing";
 // helper functions
 const instantiateContract = async (initClient: RestClient, initPen: Secp256k1Pen, codeId: number, msg: object, transferAmount?: types.Coin[]): Promise<string> => {
   const memo = "Create an ERC20 instance";
-  const sender = pubkeyToAddress({ "type": types.pubkeyType.secp256k1, "value": toBase64(initPen.pubkey)}, "cosmos");
+  const sender = pubkeyToAddress({ "type": types.pubkeyType.secp256k1, "value": toBase64(initPen.pubkey)}, "enigma");
   const instantiateContractMsg = {
     type: "wasm/instantiate",
     value: {
@@ -59,7 +59,7 @@ const instantiateContract = async (initClient: RestClient, initPen: Secp256k1Pen
 // helper functions
 const executeContract = async (execClient: RestClient, execPen: Secp256k1Pen, contractAddr: string, msg: object, transferAmount?: types.Coin[]): Promise<readonly logs.Log[]> => {
   const memo = "Create an ERC20 instance";
-  const sender = pubkeyToAddress({ "type": types.pubkeyType.secp256k1, "value": toBase64(execPen.pubkey)}, "cosmos");
+  const sender = pubkeyToAddress({ "type": types.pubkeyType.secp256k1, "value": toBase64(execPen.pubkey)}, "enigma");
   const instantiateContractMsg = {
     type: "wasm/execute",
     value: {
@@ -97,5 +97,5 @@ const randomAddress = async (): Promise<string> => {
   const mnemonic = Bip39.encode(Random.getBytes(16)).toString();
   const randomPen = await Secp256k1Pen.fromMnemonic(mnemonic);
   const pubkey = encodeSecp256k1Pubkey(randomPen.pubkey);
-  return pubkeyToAddress(pubkey, "cosmos");
+  return pubkeyToAddress(pubkey, "enigma");
 }

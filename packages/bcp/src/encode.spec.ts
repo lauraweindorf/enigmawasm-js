@@ -27,41 +27,41 @@ import { BankTokens, Erc20Token } from "./types";
 const { fromBase64 } = Encoding;
 
 describe("encode", () => {
-  const atom = "ATOM" as TokenTicker;
-  // https://rpc.cosmos.network:26657/tx?hash=0x2268EB5AB730B45F8426078827BB5BB49819CE2B0D74B2C1D191070BADB379F1&prove=true
+  const scrt = "SCRT" as TokenTicker;
+  // https://enigma-testnet.chainofsecrets.org/txs?hash=0x2268EB5AB730B45F8426078827BB5BB49819CE2B0D74B2C1D191070BADB379F1&prove=true
   const defaultPubkey = {
     algo: Algorithm.Secp256k1,
     data: fromBase64("AtQaCqFnshaZQp6rIkvAPyzThvCvXSDO+9AzbxVErqJP") as PubkeyBytes,
   };
   const defaultChainId = "not-used" as ChainId;
-  const defaultSender = "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r" as Address;
-  const defaultRecipient = "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e" as Address;
+  const defaultSender = "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r" as Address;
+  const defaultRecipient = "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e" as Address;
   const defaultAmount: Amount = {
     fractionalDigits: 6,
     quantity: "11657995",
-    tokenTicker: atom,
+    tokenTicker: scrt,
   };
-  const defaultMemo = "hello cosmos hub";
+  const defaultMemo = "hello enigma blockchain";
   const defaultTokens: BankTokens = [
     {
       fractionalDigits: 6,
-      ticker: "ATOM",
-      denom: "uatom",
+      ticker: "SCRT",
+      denom: "uscrt",
     },
   ];
   const defaultErc20Tokens: Erc20Token[] = [
     {
-      contractAddress: "cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",
+      contractAddress: "enigma18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",
       fractionalDigits: 5,
       ticker: "HASH",
     },
     {
-      contractAddress: "cosmos1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
+      contractAddress: "enigma1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
       fractionalDigits: 0,
       ticker: "ISA",
     },
     {
-      contractAddress: "cosmos18r5szma8hm93pvx6lwpjwyxruw27e0k5uw835c",
+      contractAddress: "enigma18r5szma8hm93pvx6lwpjwyxruw27e0k5uw835c",
       fractionalDigits: 18,
       ticker: "JADE",
     },
@@ -110,7 +110,7 @@ describe("encode", () => {
   describe("toBankCoin", () => {
     it("encodes an amount", () => {
       expect(toBankCoin(defaultAmount, defaultTokens)).toEqual({
-        denom: "uatom",
+        denom: "uscrt",
         amount: "11657995",
       });
     });
@@ -129,7 +129,7 @@ describe("encode", () => {
         tokens: {
           fractionalDigits: 6,
           quantity: "5000",
-          tokenTicker: atom,
+          tokenTicker: scrt,
         },
       };
       expect(() => encodeFee(fee, defaultTokens)).toThrowError(/cannot encode fee without gas limit/i);
@@ -140,12 +140,12 @@ describe("encode", () => {
         tokens: {
           fractionalDigits: 6,
           quantity: "5000",
-          tokenTicker: atom,
+          tokenTicker: scrt,
         },
         gasLimit: "200000",
       };
       expect(encodeFee(fee, defaultTokens)).toEqual({
-        amount: [{ denom: "uatom", amount: "5000" }],
+        amount: [{ denom: "uscrt", amount: "5000" }],
         gas: "200000",
       });
     });
@@ -255,7 +255,7 @@ describe("encode", () => {
           tokens: {
             fractionalDigits: 6,
             quantity: "5000",
-            tokenTicker: atom,
+            tokenTicker: scrt,
           },
           gasLimit: "200000",
         },
@@ -267,11 +267,11 @@ describe("encode", () => {
             {
               type: "cosmos-sdk/MsgSend",
               value: {
-                from_address: "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
-                to_address: "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
+                from_address: "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
+                to_address: "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
                 amount: [
                   {
-                    denom: "uatom",
+                    denom: "uscrt",
                     amount: "11657995",
                   },
                 ],
@@ -279,7 +279,7 @@ describe("encode", () => {
             },
           ],
           fee: {
-            amount: [{ denom: "uatom", amount: "5000" }],
+            amount: [{ denom: "uscrt", amount: "5000" }],
             gas: "200000",
           },
           signatures: [],
@@ -292,8 +292,8 @@ describe("encode", () => {
       const bashSendTx: SendTransaction = {
         kind: "bcp/send",
         chainId: defaultChainId,
-        sender: "cosmos1txqfn5jmcts0x0q7krdxj8tgf98tj0965vqlmq" as Address,
-        recipient: "cosmos1dddd" as Address,
+        sender: "enigma1txqfn5jmcts0x0q7krdxj8tgf98tj0965vqlmq" as Address,
+        recipient: "enigma1dddd" as Address,
         memo: defaultMemo,
         amount: {
           fractionalDigits: 0,
@@ -304,7 +304,7 @@ describe("encode", () => {
           tokens: {
             fractionalDigits: 6,
             quantity: "3333",
-            tokenTicker: "ATOM" as TokenTicker,
+            tokenTicker: "SCRT" as TokenTicker,
           },
           gasLimit: "234000",
         },
@@ -314,13 +314,13 @@ describe("encode", () => {
         value: {
           msg: [
             {
-              type: "wasm/execute",
+              type: "compute/execute",
               value: {
-                sender: "cosmos1txqfn5jmcts0x0q7krdxj8tgf98tj0965vqlmq",
-                contract: "cosmos1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
+                sender: "enigma1txqfn5jmcts0x0q7krdxj8tgf98tj0965vqlmq",
+                contract: "enigma1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
                 msg: {
                   transfer: {
-                    recipient: "cosmos1dddd",
+                    recipient: "enigma1dddd",
                     amount: "345",
                   },
                 },
@@ -329,7 +329,7 @@ describe("encode", () => {
             },
           ],
           fee: {
-            amount: [{ denom: "uatom", amount: "3333" }],
+            amount: [{ denom: "uscrt", amount: "3333" }],
             gas: "234000",
           },
           signatures: [],
@@ -353,7 +353,7 @@ describe("encode", () => {
             tokens: {
               fractionalDigits: 6,
               quantity: "5000",
-              tokenTicker: atom,
+              tokenTicker: scrt,
             },
             gasLimit: "200000",
           },
@@ -378,11 +378,11 @@ describe("encode", () => {
             {
               type: "cosmos-sdk/MsgSend",
               value: {
-                from_address: "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
-                to_address: "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
+                from_address: "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
+                to_address: "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
                 amount: [
                   {
-                    denom: "uatom",
+                    denom: "uscrt",
                     amount: "11657995",
                   },
                 ],
@@ -390,7 +390,7 @@ describe("encode", () => {
             },
           ],
           fee: {
-            amount: [{ denom: "uatom", amount: "5000" }],
+            amount: [{ denom: "uscrt", amount: "5000" }],
             gas: "200000",
           },
           signatures: [

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { IndexedTx, types } from "@cosmwasm/sdk";
+import { IndexedTx, types } from "@lcw-enigmawasm/sdk";
 import { Address, Algorithm, isSendTransaction, SendTransaction, TokenTicker } from "@iov/bcp";
 import { Encoding } from "@iov/encoding";
 import { assert } from "@iov/utils";
@@ -17,7 +17,7 @@ import {
   parseUnsignedTx,
 } from "./decode";
 import * as testdata from "./testdata.spec";
-import cosmoshub from "./testdata/cosmoshub.json";
+import enigmachain from "./testdata/enigmachain.json";
 import { BankTokens, Erc20Token } from "./types";
 
 const { fromBase64, fromHex } = Encoding;
@@ -38,14 +38,14 @@ describe("decode", () => {
   const defaultAmount = {
     fractionalDigits: 6,
     quantity: "11657995",
-    tokenTicker: "ATOM" as TokenTicker,
+    tokenTicker: "SCRT" as TokenTicker,
   };
   const defaultMemo = "Best greetings";
   const defaultSendTransaction: SendTransaction = {
     kind: "bcp/send",
     chainId: testdata.chainId,
-    sender: "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r" as Address,
-    recipient: "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e" as Address,
+    sender: "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r" as Address,
+    recipient: "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e" as Address,
     amount: defaultAmount,
     memo: defaultMemo,
   };
@@ -53,30 +53,30 @@ describe("decode", () => {
     tokens: {
       fractionalDigits: 6,
       quantity: "5000",
-      tokenTicker: "ATOM" as TokenTicker,
+      tokenTicker: "SCRT" as TokenTicker,
     },
     gasLimit: "200000",
   };
   const defaultTokens: BankTokens = [
     {
       fractionalDigits: 6,
-      ticker: "ATOM",
-      denom: "uatom",
+      ticker: "SCRT",
+      denom: "uscrt",
     },
   ];
   const defaultErc20Tokens: Erc20Token[] = [
     {
-      contractAddress: "cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",
+      contractAddress: "enigma18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",
       fractionalDigits: 5,
       ticker: "HASH",
     },
     {
-      contractAddress: "cosmos1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
+      contractAddress: "enigma1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
       fractionalDigits: 0,
       ticker: "ISA",
     },
     {
-      contractAddress: "cosmos18r5szma8hm93pvx6lwpjwyxruw27e0k5uw835c",
+      contractAddress: "enigma18r5szma8hm93pvx6lwpjwyxruw27e0k5uw835c",
       fractionalDigits: 18,
       ticker: "JADE",
     },
@@ -136,7 +136,7 @@ describe("decode", () => {
   describe("decodeAmount", () => {
     it("works", () => {
       const amount: types.Coin = {
-        denom: "uatom",
+        denom: "uscrt",
         amount: "11657995",
       };
       expect(decodeAmount(defaultTokens, amount)).toEqual(defaultAmount);
@@ -148,11 +148,11 @@ describe("decode", () => {
       const msg: types.Msg = {
         type: "cosmos-sdk/MsgSend",
         value: {
-          from_address: "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
-          to_address: "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
+          from_address: "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
+          to_address: "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
           amount: [
             {
-              denom: "uatom",
+              denom: "uscrt",
               amount: "11657995",
             },
           ],
@@ -165,14 +165,14 @@ describe("decode", () => {
 
     it("works for ERC20 send transaction", () => {
       const msg: types.MsgExecuteContract = {
-        type: "wasm/execute",
+        type: "compute/execute",
         value: {
-          sender: "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
+          sender: "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
           contract: defaultErc20Tokens[0].contractAddress,
           msg: {
             transfer: {
               amount: "887878484",
-              recipient: "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
+              recipient: "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
             },
           },
           sent_funds: [],
@@ -183,8 +183,8 @@ describe("decode", () => {
       expect(transaction).toEqual({
         kind: "bcp/send",
         chainId: testdata.chainId,
-        sender: "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r" as Address,
-        recipient: "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e" as Address,
+        sender: "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r" as Address,
+        recipient: "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e" as Address,
         amount: {
           quantity: "887878484",
           tokenTicker: "HASH" as TokenTicker,
@@ -200,7 +200,7 @@ describe("decode", () => {
       const fee = {
         amount: [
           {
-            denom: "uatom",
+            denom: "uscrt",
             amount: "5000",
           },
         ],
@@ -213,20 +213,20 @@ describe("decode", () => {
   describe("parseUnsignedTx", () => {
     it("works for bank send transaction", () => {
       expect(
-        parseUnsignedTx(cosmoshub.tx.value, testdata.chainId, defaultTokens, defaultErc20Tokens),
+        parseUnsignedTx(enigmachain.tx.value, testdata.chainId, defaultTokens, defaultErc20Tokens),
       ).toEqual(testdata.sendTxJson);
     });
 
     it("works for ERC20 send transaction", () => {
       const msg: types.MsgExecuteContract = {
-        type: "wasm/execute",
+        type: "compute/execute",
         value: {
-          sender: "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
+          sender: "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r",
           contract: defaultErc20Tokens[0].contractAddress,
           msg: {
             transfer: {
               amount: "887878484",
-              recipient: "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
+              recipient: "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e",
             },
           },
           sent_funds: [],
@@ -238,7 +238,7 @@ describe("decode", () => {
         fee: {
           amount: [
             {
-              denom: "uatom",
+              denom: "uscrt",
               amount: "5000",
             },
           ],
@@ -251,8 +251,8 @@ describe("decode", () => {
       expect(unsigned).toEqual({
         kind: "bcp/send",
         chainId: testdata.chainId,
-        sender: "cosmos1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r" as Address,
-        recipient: "cosmos1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e" as Address,
+        sender: "enigma1h806c7khnvmjlywdrkdgk2vrayy2mmvf9rxk2r" as Address,
+        recipient: "enigma1z7g5w84ynmjyg0kqpahdjqpj7yq34v3suckp0e" as Address,
         amount: {
           quantity: "887878484",
           tokenTicker: "HASH" as TokenTicker,
@@ -268,7 +268,7 @@ describe("decode", () => {
     it("works", () => {
       expect(
         parseSignedTx(
-          cosmoshub.tx.value,
+          enigmachain.tx.value,
           testdata.chainId,
           testdata.nonce,
           defaultTokens,
@@ -286,7 +286,7 @@ describe("decode", () => {
         hash: testdata.txId,
         rawLog: '[{"msg_index":0,"success":true,"log":""}]',
         logs: [],
-        tx: cosmoshub.tx,
+        tx: enigmachain.tx,
         timestamp: "2020-02-14T11:35:41Z",
       };
       const expected = {
@@ -316,7 +316,7 @@ describe("decode", () => {
         hash: testdata.txId,
         rawLog: '[{"msg_index":0,"success":true,"log":""}]',
         logs: [],
-        tx: cosmoshub.tx,
+        tx: enigmachain.tx,
         timestamp: "2020-02-14T11:35:41Z",
       };
       const expected = {
@@ -344,11 +344,11 @@ describe("decode", () => {
 
 Some output from sample rest queries:
 
-$ wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show fred -a) 98765stake -y
+$ enigmacli tx send $(enigmacli keys show validator -a) $(enigmacli keys show fred -a) 98765uscrt -y
 {
   "height": "4",
   "txhash": "8A4613D62884EF8BB9BCCDDA3833D560701908BF17FE82A570EECCBACEF94A91",
-  "raw_log": "[{\"msg_index\":0,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"send\"},{\"key\":\"sender\",\"value\":\"cosmos16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"cosmos1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k\"},{\"key\":\"amount\",\"value\":\"98765stake\"}]}]}]",
+  "raw_log": "[{\"msg_index\":0,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"send\"},{\"key\":\"sender\",\"value\":\"enigma16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"enigma1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k\"},{\"key\":\"amount\",\"value\":\"98765uscrt\"}]}]}]",
   "logs": [
     {
       "msg_index": 0,
@@ -363,7 +363,7 @@ $ wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show fred -a)
             },
             {
               "key": "sender",
-              "value": "cosmos16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje"
+              "value": "enigma16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje"
             },
             {
               "key": "module",
@@ -376,11 +376,11 @@ $ wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show fred -a)
           "attributes": [
             {
               "key": "recipient",
-              "value": "cosmos1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k"
+              "value": "enigma1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k"
             },
             {
               "key": "amount",
-              "value": "98765stake"
+              "value": "98765uscrt"
             }
           ]
         }
@@ -392,11 +392,11 @@ $ wasmcli tx send $(wasmcli keys show validator -a) $(wasmcli keys show fred -a)
 }
 
 
-$ wasmcli query tx 8A4613D62884EF8BB9BCCDDA3833D560701908BF17FE82A570EECCBACEF94A91
+$ enigmacli query tx 8A4613D62884EF8BB9BCCDDA3833D560701908BF17FE82A570EECCBACEF94A91
 {
   "height": "4",
   "txhash": "8A4613D62884EF8BB9BCCDDA3833D560701908BF17FE82A570EECCBACEF94A91",
-  "raw_log": "[{\"msg_index\":0,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"send\"},{\"key\":\"sender\",\"value\":\"cosmos16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"cosmos1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k\"},{\"key\":\"amount\",\"value\":\"98765stake\"}]}]}]",
+  "raw_log": "[{\"msg_index\":0,\"log\":\"\",\"events\":[{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"send\"},{\"key\":\"sender\",\"value\":\"enigma16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"enigma1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k\"},{\"key\":\"amount\",\"value\":\"98765uscrt\"}]}]}]",
   "logs": [
     {
       "msg_index": 0,
@@ -411,7 +411,7 @@ $ wasmcli query tx 8A4613D62884EF8BB9BCCDDA3833D560701908BF17FE82A570EECCBACEF94
             },
             {
               "key": "sender",
-              "value": "cosmos16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje"
+              "value": "enigma16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje"
             },
             {
               "key": "module",
@@ -424,11 +424,11 @@ $ wasmcli query tx 8A4613D62884EF8BB9BCCDDA3833D560701908BF17FE82A570EECCBACEF94
           "attributes": [
             {
               "key": "recipient",
-              "value": "cosmos1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k"
+              "value": "enigma1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k"
             },
             {
               "key": "amount",
-              "value": "98765stake"
+              "value": "98765uscrt"
             }
           ]
         }
@@ -444,11 +444,11 @@ $ wasmcli query tx 8A4613D62884EF8BB9BCCDDA3833D560701908BF17FE82A570EECCBACEF94
         {
           "type": "cosmos-sdk/MsgSend",
           "value": {
-            "from_address": "cosmos16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje",
-            "to_address": "cosmos1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k",
+            "from_address": "enigma16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje",
+            "to_address": "enigma1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k",
             "amount": [
               {
-                "denom": "stake",
+                "denom": "uscrt",
                 "amount": "98765"
               }
             ]
@@ -475,14 +475,14 @@ $ wasmcli query tx 8A4613D62884EF8BB9BCCDDA3833D560701908BF17FE82A570EECCBACEF94
 }
 
 
-$ wasmcli query account $(wasmcli keys show fred -a)
+$ enigmacli query account $(enigmacli keys show fred -a)
 {
   "type": "cosmos-sdk/Account",
   "value": {
-    "address": "cosmos1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k",
+    "address": "enigma1ltkhnmdcqemmd2tkhnx7qx66tq7e0wykw2j85k",
     "coins": [
       {
-        "denom": "stake",
+        "denom": "uscrt",
         "amount": "98765"
       }
     ],
@@ -493,14 +493,14 @@ $ wasmcli query account $(wasmcli keys show fred -a)
 }
 
 
-$ wasmcli query account $(wasmcli keys show validator -a)
+$ enigmacli query account $(enigmacli keys show validator -a)
 {
   "type": "cosmos-sdk/Account",
   "value": {
-    "address": "cosmos16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje",
+    "address": "enigma16qu479grzwanyzav6xvtzncgdjkwhqw7vy2pje",
     "coins": [
       {
-        "denom": "stake",
+        "denom": "uscrt",
         "amount": "899901235"
       },
       {
@@ -508,7 +508,7 @@ $ wasmcli query account $(wasmcli keys show validator -a)
         "amount": "1000000000"
       }
     ],
-    "public_key": "cosmospub1addwnpepqdw5huzg45t8qwnzcemyz2wmxrvc474zx6f3e84u8df8uyl28vrjjnp9v4p",
+    "public_key": "enigmapub1addwnpepqdw5huzg45t8qwnzcemyz2wmxrvc474zx6f3e84u8df8uyl28vrjjnp9v4p",
     "account_number": 3,
     "sequence": 2
   }

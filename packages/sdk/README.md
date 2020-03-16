@@ -1,6 +1,6 @@
-# @enigmawasm/sdk
+# @lcw-enigmawasm/sdk
 
-[![npm version](https://img.shields.io/npm/v/@enigmawasm/sdk.svg)](https://www.npmjs.com/package/@enigmawasm/sdk)
+[![npm version](https://img.shields.io/npm/v/@cosmwasm/sdk.svg)](https://www.npmjs.com/package/@lcw-enigmawasm/sdk)
 
 An SDK to build EnigmaWasm clients.
 

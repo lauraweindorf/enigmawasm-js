@@ -1,7 +1,7 @@
 import { Encoding } from "@iov/encoding";
 import axios, { AxiosError, AxiosInstance } from "axios";
 
-import { Coin, CosmosSdkTx, Model, parseWasmData, StdTx, WasmData } from "./types";
+import { Coin, CosmosSdkTx, Model, parseComputeData, StdTx, ComputeData } from "./types";
 
 const { fromBase64, toHex, toUtf8 } = Encoding;
 
@@ -105,14 +105,14 @@ interface AuthAccountsResponse {
 // Currently all wasm query responses return json-encoded strings...
 // later deprecate this and use the specific types for result
 // (assuming it is inlined, no second parse needed)
-type WasmResponse<T = string> = WasmSuccess<T> | WasmError;
+type ComputeResponse<T = string> = ComputeSuccess<T> | ComputeError;
 
-interface WasmSuccess<T = string> {
+interface ComputeSuccess<T = string> {
   readonly height: string;
   readonly result: T;
 }
 
-interface WasmError {
+interface ComputeError {
   readonly error: string;
 }
 
@@ -201,11 +201,11 @@ type RestClientResponse =
   | SearchTxsResponse
   | PostTxsResponse
   | EncodeTxResponse
-  | WasmResponse<string>
-  | WasmResponse<CodeInfo[]>
-  | WasmResponse<CodeDetails>
-  | WasmResponse<ContractInfo[] | null>
-  | WasmResponse<ContractDetails | null>;
+  | ComputeResponse<string>
+  | ComputeResponse<CodeInfo[]>
+  | ComputeResponse<CodeDetails>
+  | ComputeResponse<ContractInfo[] | null>
+  | ComputeResponse<ContractDetails | null>;
 
 /** Unfortunately, Cosmos SDK encodes empty arrays as null */
 type CosmosSdkArray<T> = ReadonlyArray<T> | null;
@@ -228,12 +228,12 @@ export enum BroadcastMode {
   Async = "async",
 }
 
-function isWasmError<T>(resp: WasmResponse<T>): resp is WasmError {
-  return (resp as WasmError).error !== undefined;
+function isComputeError<T>(resp: ComputeResponse<T>): resp is ComputeError {
+  return (resp as ComputeError).error !== undefined;
 }
 
-function unwrapWasmResponse<T>(response: WasmResponse<T>): T {
-  if (isWasmError(response)) {
+function unwrapComputeResponse<T>(response: ComputeResponse<T>): T {
+  if (isComputeError(response)) {
     throw new Error(response.error);
   }
   return response.result;
@@ -377,53 +377,53 @@ export class RestClient {
     return responseData as PostTxsResponse;
   }
 
-  // The /wasm endpoints
+  // The /compute endpoints
 
-  // wasm rest queries are listed here: https://github.com/cosmwasm/wasmd/blob/master/x/wasm/client/rest/query.go#L19-L27
+  // compute rest queries are listed here: https://github.com/enigmampc/EnigmaBlockchain/blob/master/x/compute/client/rest/query.go#L19-L27
   public async listCodeInfo(): Promise<readonly CodeInfo[]> {
-    const path = `/wasm/code`;
-    const responseData = (await this.get(path)) as WasmResponse<CosmosSdkArray<CodeInfo>>;
-    return normalizeArray(unwrapWasmResponse(responseData));
+    const path = `/compute/code`;
+    const responseData = (await this.get(path)) as ComputeResponse<CosmosSdkArray<CodeInfo>>;
+    return normalizeArray(unwrapComputeResponse(responseData));
   }
 
   // this will download the original wasm bytecode by code id
   // throws error if no code with this id
   public async getCode(id: number): Promise<CodeDetails> {
-    const path = `/wasm/code/${id}`;
-    const responseData = (await this.get(path)) as WasmResponse<CodeDetails>;
-    return unwrapWasmResponse(responseData);
+    const path = `/compute/code/${id}`;
+    const responseData = (await this.get(path)) as ComputeResponse<CodeDetails>;
+    return unwrapComputeResponse(responseData);
   }
 
   public async listContractsByCodeId(id: number): Promise<readonly ContractInfo[]> {
-    const path = `/wasm/code/${id}/contracts`;
-    const responseData = (await this.get(path)) as WasmResponse<CosmosSdkArray<ContractInfo>>;
-    return normalizeArray(unwrapWasmResponse(responseData));
+    const path = `/compute/code/${id}/contracts`;
+    const responseData = (await this.get(path)) as ComputeResponse<CosmosSdkArray<ContractInfo>>;
+    return normalizeArray(unwrapComputeResponse(responseData));
   }
 
   /**
    * Returns null when contract was not found at this address.
    */
   public async getContractInfo(address: string): Promise<ContractDetails | null> {
-    const path = `/wasm/contract/${address}`;
-    const response = (await this.get(path)) as WasmResponse<ContractDetails | null>;
-    return unwrapWasmResponse(response);
+    const path = `/compute/contract/${address}`;
+    const response = (await this.get(path)) as ComputeResponse<ContractDetails | null>;
+    return unwrapComputeResponse(response);
   }
 
   // Returns all contract state.
   // This is an empty array if no such contract, or contract has no data.
   public async getAllContractState(address: string): Promise<readonly Model[]> {
-    const path = `/wasm/contract/${address}/state`;
-    const responseData = (await this.get(path)) as WasmResponse<CosmosSdkArray<WasmData>>;
-    return normalizeArray(unwrapWasmResponse(responseData)).map(parseWasmData);
+    const path = `/compute/contract/${address}/state`;
+    const responseData = (await this.get(path)) as ComputeResponse<CosmosSdkArray<ComputeData>>;
+    return normalizeArray(unwrapComputeResponse(responseData)).map(parseComputeData);
   }
 
   // Returns the data at the key if present (unknown decoded json),
   // or null if no data at this (contract address, key) pair
   public async queryContractRaw(address: string, key: Uint8Array): Promise<Uint8Array | null> {
     const hexKey = toHex(key);
-    const path = `/wasm/contract/${address}/raw/${hexKey}?encoding=hex`;
-    const responseData = (await this.get(path)) as WasmResponse<WasmData[]>;
-    const data = unwrapWasmResponse(responseData);
+    const path = `/compute/contract/${address}/raw/${hexKey}?encoding=hex`;
+    const responseData = (await this.get(path)) as ComputeResponse<ComputeData[]>;
+    const data = unwrapComputeResponse(responseData);
     return data.length === 0 ? null : fromBase64(data[0].val);
   }
 
@@ -431,9 +431,9 @@ export class RestClient {
   // Throws error if no such contract or invalid query format
   public async queryContractSmart(address: string, query: object): Promise<Uint8Array> {
     const encoded = toHex(toUtf8(JSON.stringify(query)));
-    const path = `/wasm/contract/${address}/smart/${encoded}?encoding=hex`;
-    const responseData = (await this.get(path)) as WasmResponse<SmartQueryResponse>;
-    const result = unwrapWasmResponse(responseData);
+    const path = `/compute/contract/${address}/smart/${encoded}?encoding=hex`;
+    const responseData = (await this.get(path)) as ComputeResponse<SmartQueryResponse>;
+    const result = unwrapComputeResponse(responseData);
     // no extra parse here for now, see https://github.com/confio/cosmwasm/issues/144
     return fromBase64(result.smart);
   }

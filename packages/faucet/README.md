@@ -1,6 +1,6 @@
-# @cosmwasm/sdk
+# @lcw-enigmawasm/sdk
 
-[![npm version](https://img.shields.io/npm/v/@cosmwasm/faucet.svg)](https://www.npmjs.com/package/@cosmwasm/faucet)
+[![npm version](https://img.shields.io/npm/v/@cosmwasm/faucet.svg)](https://www.npmjs.com/package/@lcw-enigmawasm/faucet)
 
 The faucet is built as part of the monorepo. In the repo root do:
 
@@ -9,7 +9,7 @@ yarn install
 yarn build
 ```
 
-Then start it for a Wasmd development blockchain using:
+Then start it for a Enigmad development blockchain using:
 
 ```
 cd packages/faucet
@@ -19,17 +19,17 @@ yarn dev-start
 Advanced users that want to provide their custom config can start as follows:
 
 ```
-FAUCET_CREDIT_AMOUNT_COSM=10 \
+FAUCET_CREDIT_AMOUNT_SCRT=10 \
   FAUCET_CREDIT_AMOUNT_STAKE=5 \
   FAUCET_CONCURRENCY=3 \
   FAUCET_MNEMONIC="economy stock theory fatal elder harbor betray wasp final emotion task crumble siren bottom lizard educate guess current outdoor pair theory focus wife stone" \
-  ./bin/cosmwasm-faucet start "http://localhost:1317"
+  ./bin/enigmawasm-faucet start "http://localhost:1317"
 ```
 
 ## Usage
 
 ```
-Usage: cosmwasm-faucet action [arguments...]
+Usage: enigmawasm-faucet action [arguments...]
 
 Positional arguments per action are listed below. Arguments in parentheses are optional.
 
@@ -83,14 +83,14 @@ deploy the faucet via docker, make sure to copy the Dockerfile and keep it up-to
 
 ```sh
 cd docs
-docker build -t local-cosmwasm-faucet:manual --file faucet.Dockerfile .
+docker build -t local-enigmawasm-faucet:manual --file faucet.Dockerfile .
 ```
 
 - Version and help
 
 ```sh
-docker run --read-only --rm local-cosmwasm-faucet:manual version
-docker run --read-only --rm local-cosmwasm-faucet:manual help
+docker run --read-only --rm local-enigmawasm-faucet:manual version
+docker run --read-only --rm local-enigmawasm-faucet:manual help
 ```
 
 - Run faucet locally
@@ -102,7 +102,7 @@ DOCKER_HOST_IP=$(docker run --read-only --rm alpine ip route | awk 'NR==1 {print
   -e FAUCET_MNEMONIC \
   -e FAUCET_CONCURRENCY \
   -p 8000:8000 \
-  local-cosmwasm-faucet:manual \
+  local-enigmawasm-faucet:manual \
   start "http://$DOCKER_HOST_IP:1317"
 ```
 
@@ -116,7 +116,7 @@ situation is different.
 ```
 curl --header "Content-Type: application/json" \
   --request POST \
-  --data '{"ticker":"ISA","address":"cosmos1yre6ac7qfgyfgvh58ph0rgw627rhw766y430qq"}' \
+  --data '{"ticker":"ISA","address":"enigma1yre6ac7qfgyfgvh58ph0rgw627rhw766y430qq"}' \
   http://localhost:8000/credit
 ```
 
@@ -133,5 +133,5 @@ curl http://localhost:8000/status
 
 This package is part of the cosmwasm-js repository, licensed under the Apache
 License 2.0 (see
-[NOTICE](https://github.com/confio/cosmwasm-js/blob/master/NOTICE) and
-[LICENSE](https://github.com/confio/cosmwasm-js/blob/master/LICENSE)).
+[NOTICE](https://github.com/lauraweindorf/enigmawasm-js/blob/master/NOTICE) and
+[LICENSE](https://github.com/lauraweindorf/enigmawasm-js/blob/master/LICENSE)).

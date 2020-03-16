@@ -55,7 +55,7 @@ describe("builder", () => {
 
     it("returns false for images with no organization", () => {
       // Those are valid dockerhub images from https://hub.docker.com/_/ubuntu and https://hub.docker.com/_/rust
-      // but not valid in the context of CosmWasm Verify
+      // but not valid in the context of EnigmaWasm Verify
       expect(isValidBuilder("ubuntu:xenial-20200212")).toEqual(false);
       expect(isValidBuilder("rust:1.40.0")).toEqual(false);
     });

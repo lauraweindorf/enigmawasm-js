@@ -40,12 +40,12 @@ export interface MsgSend extends MsgTemplate {
 }
 
 /**
- * Uploads Wam code to the chain
+ * Uploads Wasm code to the chain
  *
- * @see https://github.com/cosmwasm/wasmd/blob/9842678d89/x/wasm/internal/types/msg.go#L17
+ * @see https://github.com/enigmampc/EnigmaBlockchain/blob/master/x/compute/internal/types/msg.go#L17
  */
 export interface MsgStoreCode extends MsgTemplate {
-  readonly type: "wasm/store-code";
+  readonly type: "compute/store-code";
   readonly value: {
     /** Bech32 account address */
     readonly sender: string;
@@ -61,10 +61,10 @@ export interface MsgStoreCode extends MsgTemplate {
 /**
  * Creates an instance of contract that was uploaded before.
  *
- * @see https://github.com/cosmwasm/wasmd/blob/9842678d89/x/wasm/internal/types/msg.go#L73
+ * @see https://github.com/enigmampc/EnigmaBlockchain/blob/master/x/compute/internal/types/msg.go#L73
  */
 export interface MsgInstantiateContract extends MsgTemplate {
-  readonly type: "wasm/instantiate";
+  readonly type: "compute/instantiate";
   readonly value: {
     /** Bech32 account address */
     readonly sender: string;
@@ -81,10 +81,10 @@ export interface MsgInstantiateContract extends MsgTemplate {
 /**
  * Creates an instance of contract that was uploaded before.
  *
- * @see https://github.com/cosmwasm/wasmd/blob/9842678d89/x/wasm/internal/types/msg.go#L103
+ * @see https://github.com/enigmampc/EnigmaBlockchain/blob/master/x/compute/internal/types/msg.go#L103
  */
 export interface MsgExecuteContract extends MsgTemplate {
-  readonly type: "wasm/execute";
+  readonly type: "compute/execute";
   readonly value: {
     /** Bech32 account address */
     readonly sender: string;
@@ -103,15 +103,15 @@ export function isMsgSend(msg: Msg): msg is MsgSend {
 }
 
 export function isMsgStoreCode(msg: Msg): msg is MsgStoreCode {
-  return (msg as MsgStoreCode).type === "wasm/store-code";
+  return (msg as MsgStoreCode).type === "compute/store-code";
 }
 
 export function isMsgInstantiateContract(msg: Msg): msg is MsgInstantiateContract {
-  return (msg as MsgInstantiateContract).type === "wasm/instantiate";
+  return (msg as MsgInstantiateContract).type === "compute/instantiate";
 }
 
 export function isMsgExecuteContract(msg: Msg): msg is MsgExecuteContract {
-  return (msg as MsgExecuteContract).type === "wasm/execute";
+  return (msg as MsgExecuteContract).type === "compute/execute";
 }
 
 export interface StdFee {
@@ -150,7 +150,7 @@ export const pubkeyType = {
 
 export const pubkeyTypes: readonly string[] = [pubkeyType.secp256k1, pubkeyType.ed25519, pubkeyType.sr25519];
 
-export interface WasmData {
+export interface ComputeData {
   // key is hex-encoded
   readonly key: string;
   // value is base64 encoded
@@ -163,7 +163,7 @@ export interface Model {
   readonly val: Uint8Array;
 }
 
-export function parseWasmData({ key, val }: WasmData): Model {
+export function parseComputeData({ key, val }: ComputeData): Model {
   return {
     key: fromHex(key),
     val: fromBase64(val),

@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/camelcase */
 import { isNonNullObject } from "@iov/encoding";
 
-const supportedEventTypes: readonly string[] = ["message", "transfer", "wasm"];
+const supportedEventTypes: readonly string[] = ["message", "transfer", "compute"];
 
-export type SupportedEventType = "message" | "transfer" | "wasm";
+export type SupportedEventType = "message" | "transfer" | "compute";
 
 export function isSupportedEventType(data: any): data is SupportedEventType {
   if (typeof data !== "string") return false;

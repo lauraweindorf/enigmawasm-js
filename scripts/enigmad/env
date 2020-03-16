@@ -1,0 +1,5 @@
+# Choose from https://hub.docker.com/r/laura/enigmawasm/enigmad-demo/tags
+REPOSITORY="laura/enigmawasm/enigmad-demo"
+VERSION="v0.0.1"
+
+CONTAINER_NAME="enigmad"

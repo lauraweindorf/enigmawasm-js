@@ -1,6 +1,6 @@
 {
-  "name": "@enigmawasm/sdk",
-  "version": "0.7.5",
+  "name": "@lcw-enigmawasm/sdk",
+  "version": "0.0.1",
   "description": "EnigmaWasm SDK",
   "author": "(adapted from repo by Ethan Frey <ethanfrey@users.noreply.github.com>)",
   "license": "Apache-2.0",

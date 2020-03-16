@@ -8,9 +8,9 @@ import { assert } from "@iov/utils";
 import { Faucet } from "./faucet";
 import { createUserProfile } from "./profile";
 
-function pendingWithoutWasmd(): void {
-  if (!process.env.WASMD_ENABLED) {
-    return pending("Set WASMD_ENABLED to enable Cosmos node-based tests");
+function pendingWithoutEnigmad(): void {
+  if (!process.env.ENIGMAD_ENABLED) {
+    return pending("Set ENIGMAD_ENABLED to enable Enigma node-based tests");
   }
 }
 
@@ -20,8 +20,8 @@ const defaultConfig: TokenConfiguration = {
     {
       fractionalDigits: 6,
       name: "Fee Token",
-      ticker: "COSM",
-      denom: "ucosm",
+      ticker: "SCRT",
+      denom: "uscrt",
     },
     {
       fractionalDigits: 6,
@@ -32,15 +32,15 @@ const defaultConfig: TokenConfiguration = {
   ],
   erc20Tokens: [
     {
-      contractAddress: "cosmos1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
+      contractAddress: "enigma1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
       fractionalDigits: 0,
       ticker: "ISA",
       name: "Isa Token",
     },
   ],
 };
-const defaultAddressPrefix = "cosmos";
-const defaultChainId = "cosmos:testing" as ChainId;
+const defaultAddressPrefix = "enigma";
+const defaultChainId = "enigma:testing" as ChainId;
 const codec = new CosmWasmCodec(defaultAddressPrefix, defaultConfig.bankTokens, defaultConfig.erc20Tokens);
 
 function makeRandomAddress(): Address {
@@ -64,7 +64,7 @@ async function makeProfile(
 describe("Faucet", () => {
   describe("constructor", () => {
     it("can be constructed", async () => {
-      pendingWithoutWasmd();
+      pendingWithoutEnigmad();
       const connection = await CosmWasmConnection.establish(httpUrl, defaultAddressPrefix, defaultConfig);
       const { profile } = await makeProfile();
       const faucet = new Faucet(defaultConfig, connection, codec, profile);
@@ -75,7 +75,7 @@ describe("Faucet", () => {
 
   describe("send", () => {
     it("can send bank token", async () => {
-      pendingWithoutWasmd();
+      pendingWithoutEnigmad();
       const connection = await CosmWasmConnection.establish(httpUrl, defaultAddressPrefix, defaultConfig);
       const { profile, holder } = await makeProfile();
       const faucet = new Faucet(defaultConfig, connection, codec, profile);
@@ -84,7 +84,7 @@ describe("Faucet", () => {
         amount: {
           quantity: "23456",
           fractionalDigits: 6,
-          tokenTicker: "COSM" as TokenTicker,
+          tokenTicker: "SCRT" as TokenTicker,
         },
         sender: holder,
         recipient: recipient,
@@ -95,14 +95,14 @@ describe("Faucet", () => {
         {
           quantity: "23456",
           fractionalDigits: 6,
-          tokenTicker: "COSM" as TokenTicker,
+          tokenTicker: "SCRT" as TokenTicker,
         },
       ]);
       connection.disconnect();
     });
 
     it("can send ERC20 token", async () => {
-      pendingWithoutWasmd();
+      pendingWithoutEnigmad();
       const connection = await CosmWasmConnection.establish(httpUrl, defaultAddressPrefix, defaultConfig);
       const { profile, holder } = await makeProfile();
       const faucet = new Faucet(defaultConfig, connection, codec, profile);
@@ -131,7 +131,7 @@ describe("Faucet", () => {
 
   describe("refill", () => {
     it("works", async () => {
-      pendingWithoutWasmd();
+      pendingWithoutEnigmad();
       const connection = await CosmWasmConnection.establish(httpUrl, defaultAddressPrefix, defaultConfig);
       const { profile, distributors } = await makeProfile(1);
       const faucet = new Faucet(defaultConfig, connection, codec, profile);
@@ -140,7 +140,7 @@ describe("Faucet", () => {
       assert(distributorBalance);
       expect(distributorBalance).toEqual([
         jasmine.objectContaining({
-          tokenTicker: "COSM",
+          tokenTicker: "SCRT",
           fractionalDigits: 6,
         }),
         jasmine.objectContaining({
@@ -161,26 +161,26 @@ describe("Faucet", () => {
 
   describe("credit", () => {
     it("works for fee token", async () => {
-      pendingWithoutWasmd();
+      pendingWithoutEnigmad();
       const connection = await CosmWasmConnection.establish(httpUrl, defaultAddressPrefix, defaultConfig);
       const { profile } = await makeProfile(1);
       const faucet = new Faucet(defaultConfig, connection, codec, profile);
       const recipient = makeRandomAddress();
-      await faucet.credit(recipient, "COSM" as TokenTicker);
+      await faucet.credit(recipient, "SCRT" as TokenTicker);
       const account = await connection.getAccount({ address: recipient });
       assert(account);
       expect(account.balance).toEqual([
         {
           quantity: "10000000",
           fractionalDigits: 6,
-          tokenTicker: "COSM" as TokenTicker,
+          tokenTicker: "SCRT" as TokenTicker,
         },
       ]);
       connection.disconnect();
     });
 
     it("works for stake token", async () => {
-      pendingWithoutWasmd();
+      pendingWithoutEnigmad();
       const connection = await CosmWasmConnection.establish(httpUrl, defaultAddressPrefix, defaultConfig);
       const { profile } = await makeProfile(1);
       const faucet = new Faucet(defaultConfig, connection, codec, profile);
@@ -201,19 +201,19 @@ describe("Faucet", () => {
 
   describe("loadTokenTickers", () => {
     it("works", async () => {
-      pendingWithoutWasmd();
+      pendingWithoutEnigmad();
       const connection = await CosmWasmConnection.establish(httpUrl, defaultAddressPrefix, defaultConfig);
       const { profile } = await makeProfile();
       const faucet = new Faucet(defaultConfig, connection, codec, profile);
       const tickers = await faucet.loadTokenTickers();
-      expect(tickers).toEqual(["COSM", "ISA", "STAKE"]);
+      expect(tickers).toEqual(["SCRT", "ISA", "STAKE"]);
       connection.disconnect();
     });
   });
 
   describe("loadAccounts", () => {
     it("works", async () => {
-      pendingWithoutWasmd();
+      pendingWithoutEnigmad();
       const connection = await CosmWasmConnection.establish(httpUrl, defaultAddressPrefix, defaultConfig);
       const { profile, holder } = await makeProfile();
       const faucet = new Faucet(defaultConfig, connection, codec, profile);

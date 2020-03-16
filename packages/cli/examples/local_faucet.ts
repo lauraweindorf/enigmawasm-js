@@ -4,7 +4,7 @@ const defaultFee: types.StdFee = {
   amount: [
     {
       amount: "5000",
-      denom: "ucosm",
+      denom: "uscrt",
     },
   ],
   gas: "890000",
@@ -12,7 +12,7 @@ const defaultFee: types.StdFee = {
 
 const faucetMnemonic =
   "economy stock theory fatal elder harbor betray wasp final emotion task crumble siren bottom lizard educate guess current outdoor pair theory focus wife stone";
-const faucetAddress = "cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6";
+const faucetAddress = "enigma1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6";
 
 const pen = await Secp256k1Pen.fromMnemonic(faucetMnemonic);
 const client = new RestClient(defaultHttpUrl);

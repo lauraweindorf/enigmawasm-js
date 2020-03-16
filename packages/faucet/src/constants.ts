@@ -25,7 +25,7 @@ export const developmentTokenConfig: TokenConfiguration = {
   ],
   erc20Tokens: [
     {
-      contractAddress: "cosmos1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
+      contractAddress: "enigma1hqrdl6wstt8qzshwc6mrumpjk9338k0lr4dqxd",
       fractionalDigits: 0,
       ticker: "ISA",
       name: "Isa Token",

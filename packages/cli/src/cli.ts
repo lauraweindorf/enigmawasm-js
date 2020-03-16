@@ -7,7 +7,7 @@ import { TsRepl } from "./tsrepl";
 import colors = require("colors/safe");
 
 export function main(originalArgs: readonly string[]): void {
-  const parser = new ArgumentParser({ description: "The CosmWasm REPL" });
+  const parser = new ArgumentParser({ description: "The EnigmaWasm REPL" });
   parser.addArgument("--version", {
     action: "storeTrue",
     help: "Print version and exit",
@@ -39,7 +39,7 @@ export function main(originalArgs: readonly string[]): void {
 
   const imports = new Map<string, readonly string[]>([
     [
-      "@cosmwasm/sdk",
+      "@lcw-enigmawasm/sdk",
       [
         "encodeSecp256k1Pubkey",
         "encodeSecp256k1Signature",
@@ -50,7 +50,7 @@ export function main(originalArgs: readonly string[]): void {
         "RestClient",
         "Secp256k1Pen",
         "types",
-        // cosmwasmclient
+        // enigmawasmclient
         "Account",
         "Block",
         "BlockHeader",
@@ -58,7 +58,7 @@ export function main(originalArgs: readonly string[]): void {
         "CodeDetails",
         "Contract",
         "ContractDetails",
-        "CosmWasmClient",
+        "EnigmaWasmClient",
         "GetNonceResult",
         "IndexedTx",
         "PostTxResult",
@@ -67,11 +67,11 @@ export function main(originalArgs: readonly string[]): void {
         "SearchBySentFromOrToQuery",
         "SearchTxQuery",
         "SearchTxFilter",
-        // signingcosmwasmclient
+        // signingenigmawasmclient
         "ExecuteResult",
         "InstantiateResult",
         "SigningCallback",
-        "SigningCosmWasmClient",
+        "SigningEnigmaWasmClient",
         "UploadMeta",
         "UploadResult",
       ],
@@ -155,7 +155,7 @@ export function main(originalArgs: readonly string[]): void {
       const mnemonic = Bip39.encode(Random.getBytes(16)).toString();
       const pen = await Secp256k1Pen.fromMnemonic(mnemonic);
       const pubkey = encodeSecp256k1Pubkey(pen.pubkey);
-      const address = pubkeyToAddress(pubkey, "cosmos");
+      const address = pubkeyToAddress(pubkey, "enigma");
       const data = Encoding.toAscii("foo bar");
       const signature = await pen.sign(data);
 

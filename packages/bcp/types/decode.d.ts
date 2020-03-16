@@ -1,4 +1,4 @@
-import { IndexedTx, types } from "@cosmwasm/sdk";
+import { IndexedTx, types } from "@lcw-enigmawasm/sdk";
 import {
   Amount,
   ChainId,

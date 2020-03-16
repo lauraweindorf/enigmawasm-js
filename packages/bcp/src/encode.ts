@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/camelcase */
-import { encodeSecp256k1Pubkey, encodeSecp256k1Signature, types } from "@cosmwasm/sdk";
+import { encodeSecp256k1Pubkey, encodeSecp256k1Signature, types } from "@enigmawasm/sdk";
 import {
   Algorithm,
   Amount,
@@ -118,7 +118,7 @@ export function buildUnsignedTx(
       value: {
         msg: [
           {
-            type: "wasm/execute",
+            type: "compute/execute",
             value: {
               sender: tx.sender,
               contract: matchingErc20Token.contractAddress,

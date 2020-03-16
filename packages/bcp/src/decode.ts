@@ -1,4 +1,4 @@
-import { IndexedTx, types } from "@cosmwasm/sdk";
+import { IndexedTx, types } from "@laura/enigmawasm/sdk";
 import {
   Address,
   Algorithm,

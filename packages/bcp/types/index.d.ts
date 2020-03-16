@@ -1,3 +1,3 @@
-export { CosmWasmCodec } from "./cosmwasmcodec";
-export { CosmWasmConnection, TokenConfiguration } from "./cosmwasmconnection";
-export { createCosmWasmConnector } from "./cosmwasmconnector";
+export { EnigmaWasmCodec } from "./enigmawasmcodec";
+export { EnigmaWasmConnection, TokenConfiguration } from "./enigmawasmconnection";
+export { createEnigmaWasmConnector } from "./enigmawasmconnector";

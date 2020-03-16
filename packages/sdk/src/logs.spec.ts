@@ -30,7 +30,7 @@ describe("logs", () => {
           },
           {
             key: "module",
-            value: "wasm",
+            value: "compute",
           },
           {
             key: "action",
@@ -38,7 +38,7 @@ describe("logs", () => {
           },
           {
             key: "sender",
-            value: "cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+            value: "enigma1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
           },
           {
             key: "code_id",
@@ -57,7 +57,7 @@ describe("logs", () => {
         attributes: [
           {
             key: "recipient",
-            value: "cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",
+            value: "enigma18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",
           },
           {
             key: "amount",
@@ -69,7 +69,7 @@ describe("logs", () => {
         attributes: [
           {
             key: "recipient",
-            value: "cosmos18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",
+            value: "enigma18vd8fpwxzck93qlwghaj6arh4p7c5n89uzcee5",
           },
           {
             key: "amount",
@@ -98,7 +98,7 @@ describe("logs", () => {
               },
               {
                 key: "module",
-                value: "wasm",
+                value: "compute",
               },
               {
                 key: "action",
@@ -106,7 +106,7 @@ describe("logs", () => {
               },
               {
                 key: "sender",
-                value: "cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+                value: "enigma1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
               },
               {
                 key: "code_id",
@@ -138,7 +138,7 @@ describe("logs", () => {
                 },
                 {
                   key: "module",
-                  value: "wasm",
+                  value: "compute",
                 },
                 {
                   key: "action",
@@ -146,7 +146,7 @@ describe("logs", () => {
                 },
                 {
                   key: "sender",
-                  value: "cosmos1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
+                  value: "enigma1pkptre7fdkl6gfrzlesjjvhxhlc3r4gmmk8rs6",
                 },
                 {
                   key: "code_id",
