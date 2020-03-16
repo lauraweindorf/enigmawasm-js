@@ -25,6 +25,6 @@ To run the entire test suite, you need to run a local blockchain to test against
 ```sh
 ./scripts/enigmad/start.sh
 ./scripts/enigmad/init.sh
-WASMD_ENABLED=1 yarn test
+ENIGMAD_ENABLED=1 yarn test
 ./scripts/enigmad/stop.sh
 ```
